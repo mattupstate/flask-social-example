@@ -1,0 +1,4 @@
+PRODUCTION:
+  SECRET_KEY: put your random secret key here
+  
+  

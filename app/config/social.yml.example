@@ -1,0 +1,25 @@
+DEVELOPMENT:
+  SOCIAL_TWITTER:
+    oauth:
+      consumer_key: 'twitter app consumer key'
+      consumer_secret: 'twitter app consumer secret'
+    
+  SOCIAL_FACEBOOK:
+    oauth:
+      consumer_key: 'facebook app id'
+      consumer_secret: 'facebook app secret'
+      request_token_params:
+        scope: email
+
+PRODUCTION:
+  SOCIAL_TWITTER:
+    oauth:
+      consumer_key: 'twitter app consumer key'
+      consumer_secret: 'twitter app consumer secret'
+    
+  SOCIAL_FACEBOOK:
+    oauth:
+      consumer_key: 'facebook app id'
+      consumer_secret: 'facebook app secret'
+      request_token_params:
+        scope: email

@@ -1,0 +1,8 @@
+Flask
+Flask-Assets
+Flask-Script
+Flask-Social
+Flask-SQLAlchemy
+PyYAML
+python-twitter
+http://github.com/pythonforfacebook/facebook-sdk/tarball/master

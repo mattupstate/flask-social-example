@@ -1,0 +1,13 @@
+COMMON: &common
+  SECRET_KEY: insecure
+  SECURITY_POST_LOGIN: /profile
+    
+DEVELOPMENT: &development
+  <<: *common
+  DEBUG: True
+  SQLALCHEMY_DATABASE_URI: sqlite:////tmp/flask_social_example_development.sqlite
+
+PRODUCTION: &production
+  <<: *common
+  SECURITY_PASSWORD_HASH: bcrypt
+  SOCIAL_APP_URL: http://flask-social-example.ep.io

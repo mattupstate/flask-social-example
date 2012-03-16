@@ -1,0 +1,25 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}main main-profile{% endblock %}
+
+{% macro show_provider_button(provider_id, display_name, conn) %}
+    {% if conn %}
+    <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}" method="DELETE">
+      <input type="submit" value="Remove {{ display_name }} Connection" />
+    </form>
+    {% else %}
+    <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST">
+      <input type="submit" value="Connect with {{ display_name }}" />
+    </form>
+    {% endif %}
+{% endmacro %}
+
+{% block layout %}
+<h2>Profile Page</h2>
+
+<h3>Hello, {{ current_user.username }}!</h3>
+
+{{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
+
+{{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
+{% endblock %}

@@ -1,0 +1,8 @@
+.DS_Store
+.settings
+.project
+.pydevproject
+.webaassets-cache
+*.pyc
+app/config/*.yml
+!app/config/app.yml
