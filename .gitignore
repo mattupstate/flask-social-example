@@ -4,5 +4,7 @@
 .pydevproject
 .webaassets-cache
 *.pyc
+app/static/css/*.css
+app/static/js/*.js
 app/config/*.yml
 !app/config/app.yml
