@@ -1,11 +1,11 @@
 COMMON: &common
   SECRET_KEY: insecure
   SECURITY_POST_LOGIN: /profile
+  SQLALCHEMY_DATABASE_URI: sqlite:////tmp/flask_social_example_development.sqlite
     
 DEVELOPMENT: &development
   <<: *common
   DEBUG: True
-  SQLALCHEMY_DATABASE_URI: sqlite:////tmp/flask_social_example_development.sqlite
 
 PRODUCTION: &production
   <<: *common

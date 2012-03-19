@@ -22,13 +22,13 @@ class Config(BaseConfig):
         env = os.environ.get('FLASK_ENV', 'DEVELOPMENT').upper()
         self['ENVIRONMENT'] = env.lower()
         
-        for fn in ('app', 'social', 'keys'):
+        for fn in ('app', 'credentials'):
             config_file = os.path.join(root_path, 'config', '%s.yml' % fn)
             
             with open(config_file) as f:
                 c = yaml.load(f)
             
-            c = c.get(env, {})
+            c = c.get(env, c)
             
             for key in c.iterkeys():
                 if key.isupper():

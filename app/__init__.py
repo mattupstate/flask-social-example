@@ -5,7 +5,6 @@ from .helpers import Flask
 
 from flask import current_app, redirect, render_template, request
 
-
 from flask.ext.security import Security, LoginForm, current_user, login_required
 from flask.ext.security.datastore.sqlalchemy import SQLAlchemyUserDatastore
 
@@ -17,16 +16,23 @@ from flask.ext.sqlalchemy import SQLAlchemy
 def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
-    app.config.from_bundle_config()
+    #app.config.from_bundle_config()
+    
+    #app.logger.debug(app.config['SQLALCHEMY_DATABASE_URI'])
     
     init_assets(app)
     
-    db = SQLAlchemy(app)
+    #db = SQLAlchemy(app)
     
-    Security(app, SQLAlchemyUserDatastore(db))
-    Social(app, SQLAlchemyConnectionDatastore(db))
+    #Security(app, SQLAlchemyUserDatastore(db))
+    #Social(app, SQLAlchemyConnectionDatastore(db))
     
-    db.create_all()
+    """
+    try:
+        db.create_all()
+    except:
+        pass
+    """
     
     @app.route('/')
     def index():
