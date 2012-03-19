@@ -15,6 +15,7 @@ def init_assets(app):
                       debug=False)
     
     assets = Environment(app)
+    assets.cache = False
     assets.debug = app.config['ENVIRONMENT'] in ['development', 'staging']
     
     assets.register('js_libs', js_libs)

@@ -16,23 +16,20 @@ from flask.ext.sqlalchemy import SQLAlchemy
 def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
-    #app.config.from_bundle_config()
     
-    #app.logger.debug(app.config['SQLALCHEMY_DATABASE_URI'])
+    try:
+        app.config.from_bundle_config()
+    except Exception, e:
+        print "Error: %s" % e
     
     init_assets(app)
     
-    #db = SQLAlchemy(app)
+    db = SQLAlchemy(app)
+    Security(app, SQLAlchemyUserDatastore(db))
+    Social(app, SQLAlchemyConnectionDatastore(db))
     
-    #Security(app, SQLAlchemyUserDatastore(db))
-    #Social(app, SQLAlchemyConnectionDatastore(db))
-    
-    """
-    try:
-        db.create_all()
-    except:
-        pass
-    """
+    try: db.create_all()
+    except: pass
     
     @app.route('/')
     def index():
@@ -51,5 +48,5 @@ def create_app():
         return render_template('profile.html',
             twitter_conn=current_app.social.twitter.get_connection(),
             facebook_conn=current_app.social.facebook.get_connection())
-        
+    
     return app

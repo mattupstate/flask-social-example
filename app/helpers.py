@@ -16,6 +16,9 @@ class Config(BaseConfig):
         
         if 'postgres' in config:
             self['SQLALCHEMY_DATABASE_URI'] = POSTGRES_TEMPLATE % config['postgres']
+            
+        self['WEBASSETS_CACHE'] = os.path.join(config['core']['data_directory'], 
+                                               '.webassets-cache')
         
     
     def from_yaml(self, root_path):
