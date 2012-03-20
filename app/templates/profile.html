@@ -17,7 +17,7 @@
 {% block layout %}
 <h2>Profile Page</h2>
 
-<h3>Hello, {{ current_user.username }}!</h3>
+<h3>Hello, {{ current_user.email }}!</h3>
 
 {{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
 

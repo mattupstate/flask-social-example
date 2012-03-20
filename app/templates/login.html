@@ -1,3 +1,5 @@
+{% from '_macros.html' import render_field %}
+
 {% extends '/layouts/boilerplate.html' %}
 
 {% block body_class %}main main-login{% endblock %}
@@ -12,11 +14,13 @@
 <h2>Login</h2>
 
 <form action="{{ url_for('auth.authenticate') }}" method="POST">
-  {{ form.hidden_tag() }}
-  {{ form.username.label }} {{ form.username }}<br/>
-  {{ form.password.label }} {{ form.password }}<br/>
-  {{ form.remember.label }} {{ form.remember }}<br/>
-  {{ form.submit }}
+  <dl>
+    {{ form.hidden_tag() }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.remember) }}
+    {{ form.submit }}
+  </dl>
 </form>
 
 {{ social_login('twitter', 'Twitter' )}}

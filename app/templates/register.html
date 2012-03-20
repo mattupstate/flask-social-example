@@ -1,0 +1,20 @@
+{% from '_macros.html' import render_field %}
+
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}main main-register{% endblock %}
+
+{% block layout %}
+<h2>Register</h2>
+
+<form action="{{ url_for('register') }}" method="POST">
+  <dl>
+    {{ form.hidden_tag() }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    {{ form.submit }}
+  </dl>
+</form>
+{% endblock %}
