@@ -30,8 +30,7 @@ def create_app():
     Security(app, SQLAlchemyUserDatastore(db))
     Social(app, SQLAlchemyConnectionDatastore(db))
     
-    try: 
-        db.drop_all()
+    try:
         db.create_all()
     except: 
         pass
