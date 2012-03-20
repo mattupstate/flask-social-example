@@ -10,7 +10,7 @@ from flask.ext.security import (Security, LoginForm, current_user,
                                 login_required, user_datastore)
 from flask.ext.security.datastore.sqlalchemy import SQLAlchemyUserDatastore
 
-from flask.ext.social import Social
+from flask.ext.social import Social, social_login_failed
 from flask.ext.social.datastore.sqlalchemy import SQLAlchemyConnectionDatastore
 
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -18,11 +18,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
-    
-    try:
-        app.config.from_bundle_config()
-    except Exception, e:
-        print "Error: %s" % e
+    app.config.from_bundle_config()
     
     init_assets(app)
     
@@ -34,6 +30,18 @@ def create_app():
         db.create_all()
     except: 
         pass
+    
+    @app.context_processor
+    def template_extras():
+        return dict(
+            google_analytics_id=app.config.get('GOOGLE_ANALYTICS_ID', None)
+        )
+    
+    @social_login_failed.connect_via(app)
+    def on_social_login_failed(sender, provider_id, oauth_response):
+        app.logger.debug('Social Login Failed: provider_id=%s'
+                         '&oauth_response=%s' % (provider_id, oauth_response))
+        # Present the registration screen
     
     @app.route('/')
     def index():
