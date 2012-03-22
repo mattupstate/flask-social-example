@@ -3,8 +3,9 @@ import os
 from .assets import init_assets
 from .forms import RegisterForm
 from .helpers import Flask
+from .middleware import MethodRewriteMiddleware
 
-from flask import current_app, redirect, render_template, request, flash
+from flask import current_app, redirect, render_template, request, flash, url_for
 
 from flask.ext.security import (Security, LoginForm, current_user, 
                                 login_required, user_datastore)
@@ -19,6 +20,8 @@ def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
     app.config.from_bundle_config()
+    
+    app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
     
     init_assets(app)
     
@@ -77,5 +80,26 @@ def create_app():
         return render_template('profile.html',
             twitter_conn=current_app.social.twitter.get_connection(),
             facebook_conn=current_app.social.facebook.get_connection())
+    
+    @app.route('/profile/<provider_id>/post', methods=['POST'])
+    @login_required
+    def social_post(provider_id):
+        message = request.form.get('message', None)
+        
+        if message:
+            conn = getattr(current_app.social, provider_id).get_connection()
+            api = conn['api']
+            
+            if provider_id == 'twitter':
+                display_name = 'Twitter'
+                api.PostUpdate(message)
+            if provider_id == 'facebook':
+                display_name = 'Facebook'
+                api.put_object("me", "feed", message=message)
+            
+            flash('Message posted to %s: %s' % (display_name, message), 'info')
+            
+        return redirect(url_for('profile'))
+    
     
     return app

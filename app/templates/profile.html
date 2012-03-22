@@ -4,13 +4,19 @@
 
 {% macro show_provider_button(provider_id, display_name, conn) %}
     {% if conn %}
-    <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}" method="DELETE">
-      <input type="submit" value="Remove {{ display_name }} Connection" />
-    </form>
-    {% else %}
-    <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST">
-      <input type="submit" value="Connect with {{ display_name }}" />
-    </form>
+      <p>
+        <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST">
+          <input type="submit" value="Remove {{ display_name }} Connection" />
+        </form>
+      </p>
+      <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST">
+        <input name="message" type="text" value="Hello from Flask-Social-Example!"/>
+        <input type="submit" value="Post To {{ display_name }}" />
+      </form>
+      {% else %}
+      <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST">
+        <input type="submit" value="Connect with {{ display_name }}" />
+      </form>
     {% endif %}
 {% endmacro %}
 
