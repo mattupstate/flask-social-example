@@ -12,7 +12,7 @@ class Config(BaseConfig):
     
     def from_heroku(self):
         # Register database schemes in URLs.
-        for ev in ['DATABSE_URL', 'SHARED_DATABASE_URL']
+        for ev in ['DATABSE_URL', 'SHARED_DATABASE_URL']:
             if ev in os.environ:
                 self['SQLALCHEMY_DATABASE_URI'] = ev
                 break
