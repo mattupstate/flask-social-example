@@ -27,7 +27,7 @@ class Config(BaseConfig):
                 if ev in os.environ:
                     social_key = 'SOCIAL_' + key_prefix
                     oauth_key = 'consumer_' + key_suffix
-                    self[social_key]['oauth'][oauth_key] = ev
+                    self[social_key]['oauth'][oauth_key] = os.environ[ev]
 
         
         #self['WEBASSETS_CACHE'] = 
