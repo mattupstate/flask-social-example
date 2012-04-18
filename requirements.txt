@@ -4,5 +4,6 @@ Flask-Script
 Flask-Social
 Flask-SQLAlchemy
 PyYAML
+psycopg2
 python-twitter
 http://github.com/pythonforfacebook/facebook-sdk/tarball/master
