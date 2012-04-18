@@ -5,7 +5,8 @@ from .forms import RegisterForm
 from .helpers import Flask
 from .middleware import MethodRewriteMiddleware
 
-from flask import current_app, redirect, render_template, request, flash, url_for
+from flask import current_app, redirect, render_template, request, flash, \
+                  url_for, session
 
 from flask.ext.security import (Security, LoginForm, current_user, 
                                 login_required, user_datastore)
@@ -15,6 +16,9 @@ from flask.ext.social import Social, social_login_failed
 from flask.ext.social.datastore.sqlalchemy import SQLAlchemyConnectionDatastore
 
 from flask.ext.sqlalchemy import SQLAlchemy
+
+class SocialLoginError(Exception):
+    pass
 
 def create_app():
     app = Flask(__name__)
@@ -44,7 +48,16 @@ def create_app():
     def on_social_login_failed(sender, provider_id, oauth_response):
         app.logger.debug('Social Login Failed: provider_id=%s'
                          '&oauth_response=%s' % (provider_id, oauth_response))
-        # Present the registration screen
+
+        # Save the oauth response in the session so we can make the connection
+        # later after the user possibly registers
+        session['last_oauth_response'] = dict(provider_id=provider_id,
+                                              oauth_response=oauth_response)
+        raise SocialLoginError()
+
+    @app.errorhandler(SocialLoginError)
+    def social_login_error(error):
+        return redirect(url_for('register', social_login_failed=1))
     
     @app.route('/')
     def index():
@@ -69,10 +82,22 @@ def create_app():
                     username=form.username.data, 
                     email=form.email.data,
                     password=form.password.data)
+
+            # See if there was an attempted social login prior to registering
+            # and if there was use the provider connect_handler to save a connection
+            social_login_response = session.pop('last_oauth_response', None)
+
+            if social_login_response:
+                provider = getattr(app.social, social_login_response['provider_id'])
+                provider.connect_handler(social_login_response['oauth_response'], 
+                                         user_id=str(user.id))
             
             return render_template('thanks.html', user=user)
         
-        return render_template('register.html', form=form)
+        social_login_failed = int(request.args.get('social_login_failed', 0))
+
+        return render_template('register.html', form=form, 
+                               social_login_failed=social_login_failed)
     
     @app.route('/profile')
     @login_required
