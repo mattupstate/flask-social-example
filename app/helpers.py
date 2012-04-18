@@ -28,9 +28,6 @@ class Config(BaseConfig):
                     social_key = 'SOCIAL_' + key_prefix
                     oauth_key = 'consumer_' + key_suffix
                     self[social_key]['oauth'][oauth_key] = os.environ[ev]
-
-        
-        #self['WEBASSETS_CACHE'] = 
     
     def from_yaml(self, root_path):
         env = os.environ.get('FLASK_ENV', 'DEVELOPMENT').upper()
