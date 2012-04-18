@@ -9,10 +9,6 @@
   <title>Flask-Social Example {{ page_title }}</title>
   <meta name="description" content="A working example of the Flask-Social extension for Flask, a web microframework written in Python">
   <meta name="viewport" content="width=device-width">
-  {% assets "css_main" -%}
-  <link rel="stylesheet" href="{{ ASSET_URL }}">
-  {%- endassets %}
-  {%- block stylesheets %}{% endblock %}
   {% if google_analytics_id %}
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -35,12 +31,5 @@
   {% block layout %}{% endblock -%}
   <a href="http://github.com/mattupstate/flask-social-example"><img style="position: fixed; top: 0; right: 0; border: 0;"
     src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-  {% assets "js_libs" %}
-  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {%- endassets %}
-  {% assets "js_main" -%}
-  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-  {%- endassets %}
-  {% block javascripts %}{% endblock -%}
 </body>
 </html>
