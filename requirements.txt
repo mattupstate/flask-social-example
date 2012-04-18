@@ -6,4 +6,5 @@ Flask-SQLAlchemy
 PyYAML
 psycopg2
 python-twitter
+py-bcrypt
 http://github.com/pythonforfacebook/facebook-sdk/tarball/master
