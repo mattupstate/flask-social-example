@@ -23,7 +23,6 @@ class SocialLoginError(Exception):
 def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
-    app.config.from_bundle_config()
     
     app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
     
