@@ -23,4 +23,4 @@ PRODUCTION: &production
   <<: *common
   DEBUG: True
   SECURITY_PASSWORD_HASH: bcrypt
-  SOCIAL_APP_URL: http://flask-social-example.ep.io
+  SOCIAL_APP_URL: http://furious-fire-7810.herokuapp.com/
