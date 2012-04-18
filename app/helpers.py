@@ -1,26 +1,23 @@
 import os
+import sys
+import urlparse
 import yaml
+from functools import wraps
+
 from flask import (Flask as BaseFlask, Config as BaseConfig, 
                    render_template, flash)
-from functools import wraps
 from werkzeug import BaseResponse
-
-POSTGRES_TEMPLATE = 'postgresql://%(username)s:%(password)s@%(host)s:%(port)s/%(database)s'
 
 class Config(BaseConfig):
     
-    def from_bundle_config(self):
-        try:
-            from bundle_config import config
-        except ImportError:
-            return
+    def from_heroku(self):
+        # Register database schemes in URLs.
+        for ev in ['DATABSE_URL', 'SHARED_DATABASE_URL']
+            if ev in os.environ:
+                self['SQLALCHEMY_DATABASE_URI'] = ev
+                break
         
-        if 'postgres' in config:
-            self['SQLALCHEMY_DATABASE_URI'] = POSTGRES_TEMPLATE % config['postgres']
-            
-        self['WEBASSETS_CACHE'] = os.path.join(config['core']['data_directory'], 
-                                               '.webassets-cache')
-        
+        #self['WEBASSETS_CACHE'] = 
     
     def from_yaml(self, root_path):
         env = os.environ.get('FLASK_ENV', 'DEVELOPMENT').upper()
