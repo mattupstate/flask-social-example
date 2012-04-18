@@ -12,10 +12,23 @@ class Config(BaseConfig):
     
     def from_heroku(self):
         # Register database schemes in URLs.
-        for ev in ['DATABSE_URL', 'SHARED_DATABASE_URL']:
-            if ev in os.environ:
-                self['SQLALCHEMY_DATABASE_URI'] = ev
+        for key in ['DATABSE_URL', 'SHARED_DATABASE_URL']:
+            if key in os.environ:
+                self['SQLALCHEMY_DATABASE_URI'] = os.environ[key]
                 break
+
+        for key in ['SECRET_KEY', 'GOOGLE_ANALYTICS_ID']:
+            if key in os.environ:
+                self[key] = os.environ[key]
+
+        for key_prefix in ['TWITTER', 'FACEBOOK']:
+            for key_suffix in ['key', 'secret']:
+                ev = '%s_CONSUMER_%s' % (key_prefix, key_suffix.upper())
+                if ev in os.environ:
+                    social_key = 'SOCIAL_' + key_prefix
+                    oauth_key = 'consumer_' + key_suffix
+                    self[social_key]['oauth'][oauth_key] = ev
+
         
         #self['WEBASSETS_CACHE'] = 
     
@@ -26,14 +39,17 @@ class Config(BaseConfig):
         for fn in ('app', 'credentials'):
             config_file = os.path.join(root_path, 'config', '%s.yml' % fn)
             
-            with open(config_file) as f:
-                c = yaml.load(f)
-            
-            c = c.get(env, c)
-            
-            for key in c.iterkeys():
-                if key.isupper():
-                    self[key] = c[key]
+            try:
+                with open(config_file) as f:
+                    c = yaml.load(f)
+                
+                c = c.get(env, c)
+                
+                for key in c.iterkeys():
+                    if key.isupper():
+                        self[key] = c[key]
+            except:
+                pass
                     
                 
 class Flask(BaseFlask):
