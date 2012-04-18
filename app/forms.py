@@ -1,7 +1,8 @@
 from flask.ext.security import UserNotFoundError, user_datastore
 from flask.ext.wtf import (Form, TextField, PasswordField, Required, Optional,
                            Email, Length, Regexp, ValidationError, SubmitField,
-                           EqualTo) 
+                           EqualTo)
+
 
 class UniqueUser(object):
     def __init__(self, message="User exists"):
