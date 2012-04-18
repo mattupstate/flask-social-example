@@ -26,8 +26,9 @@ def create_app():
     app.config.from_heroku()
     app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
     
+    app.logger.debug(os.environ)
     app.logger.debug(app.config)
-    
+
     init_assets(app)
     
     db = SQLAlchemy(app)
