@@ -1,7 +1,7 @@
 Flask
 Flask-Assets
 Flask-Script
-https://github.com/mattupstate/flask-social/tarball/develop
+git+git://github.com/kennethreitz/requests.git@develop
 Flask-SQLAlchemy
 PyYAML
 psycopg2
