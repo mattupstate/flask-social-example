@@ -91,6 +91,8 @@ def create_app():
 
             if social_login_response:
                 provider = getattr(app.social, social_login_response['provider_id'])
+                app.logger.debug('User tried to login but failed')
+                app.logger.debug(provider)
                 provider.connect_handler(social_login_response['oauth_response'], 
                                          user_id=str(user.id))
             
