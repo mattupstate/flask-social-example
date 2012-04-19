@@ -30,7 +30,7 @@ class Config(BaseConfig):
                     self[social_key]['oauth'][oauth_key] = os.environ[ev]
     
     def from_yaml(self, root_path):
-        env = os.environ.get('FLASK_ENV', 'DEVELOPMENT').upper()
+        env = os.environ.get('FLASK_ENV', 'development').upper()
         self['ENVIRONMENT'] = env.lower()
         
         for fn in ('app', 'credentials'):
