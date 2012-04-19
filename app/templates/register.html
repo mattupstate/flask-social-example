@@ -4,8 +4,18 @@
 
 {% block body_class %}main main-register{% endblock %}
 
+{% macro social_register(provider_id, display_name) %}
+  <form action="{{ url_for('social.login', provider_id=provider_id) }}" method="POST">
+    <input type="submit" value="Register with {{ display_name }}" />
+  </form>
+{% endmacro %}
+
 {% block layout %}
 <h2>Register</h2>
+
+{% if social_login_failed %}
+<h3>Register with your {{ provider_name }} account:</h3>
+{% endif %}
 
 <form action="{{ url_for('register') }}" method="POST">
   <dl>
@@ -17,4 +27,10 @@
     {{ form.submit }}
   </dl>
 </form>
+
+{% if not social_login_failed %}
+{{ social_register('twitter', 'Twitter' )}}
+
+{{ social_register('facebook', 'Facebook' )}}
+{% endif %}
 {% endblock %}

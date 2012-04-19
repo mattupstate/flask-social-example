@@ -9,16 +9,17 @@ from flask import current_app, redirect, render_template, request, flash, \
                   url_for, session
 
 from flask.ext.security import (Security, LoginForm, current_user, 
-                                login_required, user_datastore)
+                                login_required, user_datastore, login_user)
 from flask.ext.security.datastore.sqlalchemy import SQLAlchemyUserDatastore
 
-from flask.ext.social import Social, social_login_failed
+from flask.ext.social import Social, social_login_failed, get_display_name
 from flask.ext.social.datastore.sqlalchemy import SQLAlchemyConnectionDatastore
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
 class SocialLoginError(Exception):
-    pass
+    def __init__(self, provider_id):
+        self.provider_id = provider_id
 
 def create_app():
     app = Flask(__name__)
@@ -52,11 +53,13 @@ def create_app():
         # later after the user possibly registers
         session['last_oauth_response'] = dict(provider_id=provider_id,
                                               oauth_response=oauth_response)
-        raise SocialLoginError()
+        raise SocialLoginError(provider_id)
 
     @app.errorhandler(SocialLoginError)
     def social_login_error(error):
-        return redirect(url_for('register', social_login_failed=1))
+        return redirect(url_for('register', 
+                                provider_id=error.provider_id, 
+                                social_login_failed=1))
     
     @app.route('/')
     def index():
@@ -70,7 +73,8 @@ def create_app():
         return render_template('login.html', form=LoginForm())
     
     @app.route('/register', methods=['GET', 'POST'])
-    def register():
+    @app.route('/register/<provider_id>')
+    def register(provider_id=None):
         if current_user.is_authenticated():
             return redirect(request.referrer or '/')
         
@@ -87,18 +91,27 @@ def create_app():
             social_login_response = session.pop('last_oauth_response', None)
 
             if social_login_response:
-                provider = getattr(app.social, social_login_response['provider_id'])
-                app.logger.debug('User tried to login but failed')
-                app.logger.debug(provider)
-                provider.connect_handler(social_login_response['oauth_response'], 
-                                         user_id=str(user.id))
-            
+                provider_id = social_login_response['provider_id']
+                oauth_response = social_login_response['oauth_response']
+                
+                provider = getattr(app.social, provider_id)
+                provider.connect_handler(oauth_response, user_id=str(user.id))
+                
+            if login_user(user, remember=True):
+                flash('Account created successfully', 'info')
+                return redirect(url_for('profile'))
+
             return render_template('thanks.html', user=user)
         
         social_login_failed = int(request.args.get('social_login_failed', 0))
+        provider_name = None
+        
+        if social_login_failed and provider_id:
+            provider_name = get_display_name(provider_id)
 
         return render_template('register.html', form=form, 
-                               social_login_failed=social_login_failed)
+                               social_login_failed=social_login_failed,
+                               provider_name=provider_name)
     
     @app.route('/profile')
     @login_required
