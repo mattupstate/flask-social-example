@@ -1,4 +1,5 @@
 import os
+from functools import wraps
 
 from .assets import init_assets
 from .forms import RegisterForm
@@ -6,8 +7,9 @@ from .helpers import Flask
 from .middleware import MethodRewriteMiddleware
 
 from flask import current_app, redirect, render_template, request, flash, \
-                  url_for, session
+                  url_for, session, Response
 
+from flask.ext import security
 from flask.ext.security import (Security, LoginForm, current_user, 
                                 login_required, user_datastore, login_user)
 from flask.ext.security.datastore.sqlalchemy import SQLAlchemyUserDatastore
@@ -20,6 +22,25 @@ from flask.ext.sqlalchemy import SQLAlchemy
 class SocialLoginError(Exception):
     def __init__(self, provider_id):
         self.provider_id = provider_id
+
+def check_auth(username, password):
+    creds = current_app.config['ADMIN_CREDENTIALS'].split(',')
+    return username == creds[0] and password == creds[1]
+
+def authenticate():
+    return Response(
+    'Could not verify your access level for that URL.\n'
+    'You have to login with proper credentials', 401,
+    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
 
 def create_app():
     app = Flask(__name__)
@@ -140,5 +161,13 @@ def create_app():
             
         return redirect(url_for('profile'))
     
+    @app.route('/admin')
+    @requires_auth
+    def admin():
+        users = security.User.query.all()
+        user_count = len(users)
+        return render_template('admin.html', 
+                                users=users, 
+                                user_count=user_count)
     
     return app

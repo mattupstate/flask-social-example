@@ -1,0 +1,18 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}admin admin-index{% endblock %}
+
+{% block layout %}
+<h2>Admin</h2>
+
+<h3>Users</h3>
+<table>
+  {% for u in users %}
+    <tr>
+      <td>{{ u.username }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.created_at }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

@@ -9,12 +9,14 @@
   <title>Flask-Social Example {{ page_title }}</title>
   <meta name="description" content="A working example of the Flask-Social extension for Flask, a web microframework written in Python">
   <meta name="viewport" content="width=device-width">
+  {% assets "css_main" %}
+  <link rel="stylesheet" href="{{ ASSET_URL }}">
+  {% endassets %}
   {% if google_analytics_id %}
   <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', '{{ google_analytics_id }}']);
     _gaq.push(['_trackPageview']);
-  
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -25,11 +27,20 @@
 </head>
 <body class="{% block body_class %}{% endblock %}">
   <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
-  <h1>Flask-Social Example</h1>
-  {% include "_messages.html" -%}
-  {% include "_nav.html" %}
-  {% block layout %}{% endblock -%}
+  <div class="container">
+    {% include "_nav.html" %}
+    {% include "_messages.html" -%}
+    {% block layout %}{% endblock -%}
+  </div>
+  <!--
   <a href="http://github.com/mattupstate/flask-social-example"><img style="position: fixed; top: 0; right: 0; border: 0;"
     src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+  -->
+  {% assets "js_libs" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
+  {% assets "js_main" %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+  {% endassets %}
 </body>
 </html>

@@ -2,6 +2,7 @@ COMMON: &common
   SECRET_KEY: insecure
   SECURITY_POST_LOGIN: /profile
   SQLALCHEMY_DATABASE_URI: postgresql://postgres:password@127.0.0.1:5432/flask_social_example_development
+  ADMIN_CREDENTIALS: 'admin,password'
 
   SOCIAL_TWITTER:
     oauth:
@@ -21,6 +22,5 @@ DEVELOPMENT: &development
 
 PRODUCTION: &production
   <<: *common
-  DEBUG: True
   SECURITY_PASSWORD_HASH: bcrypt
   SOCIAL_APP_URL: http://flask-social-example.herokuapp.com/

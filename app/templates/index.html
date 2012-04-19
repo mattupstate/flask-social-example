@@ -3,17 +3,16 @@
 {% block body_class %}main main-index{% endblock %}
 
 {% block layout %}
-  <h2>Welcome to the Flask-Social example website.</h2>
-  <p>
-    This site aims to show the basic functionality provided by the
-    <a href="http://packages.python.org/Flask-Social">Flask-Social</a> 
-    extension for <a href="http://flask.pocoo.org">Flask</a>, a Python web 
-    framework. The source code for this application can be found on 
-    <a href="https://github.com/mattupstate/flask-social-example">github</a>.
-  </p>
-  <p>
-    Currently this site allows users to register and subsequently establish
-    connections with their Twitter and/or Facebook accounts. Upon establishing 
-    a connection users can then login without having to provide their password.
-  </p>
+  <div class="hero-unit">
+    <h1>Welcome</h1>
+    <p>
+      This site illustrates the functionality provided by the <strong>Flask-Social</strong> 
+      extension for <strong>Flask</strong>.
+    </p>
+    <p>
+      <a class="btn btn-primary btn-large" href="http://packages.python.org/Flask-Social"><i class="icon-list-alt icon-white"></i> Flask-Social Documentation</a>
+      <a class="btn btn-primary btn-large" href="https://github.com/mattupstate/flask-social-example"><i class="icon-file icon-white"></i> Source Code on Github</a>
+      <a class="btn btn-primary btn-large" href="http://flask.pocoo.org"><i class="icon-info-sign icon-white"></i> Lean more about Flask</a>
+    </p>
+  </div>
 {% endblock %}

@@ -1,8 +1,9 @@
+
 from flask.ext.assets import Environment, Bundle
 
-
 def init_assets(app):
-    js_libs = Bundle("js/libs/jquery-1.7.1.min.js",
+    js_libs = Bundle("js/libs/jquery-1.7.1.min.js", 
+                     "js/libs/bootstrap.min.js",
                      filters="jsmin",
                      output="js/libs.js")
 
@@ -10,10 +11,15 @@ def init_assets(app):
                      filters="jsmin",
                      output="js/main.js")
 
-    css_main = Bundle("css/src/main.less",
+    css_less = Bundle("css/src/styles.less",
                       filters="less",
-                      output="css/main.css",
+                      output="css/styles.css",
                       debug=False)
+
+    css_main = Bundle(Bundle("css/bootstrap.min.css"), 
+                      css_less, 
+                      filters="cssmin", 
+                      output="css/main.css")
 
     assets = Environment(app)
     assets.cache = False

@@ -3,31 +3,40 @@
 {% block body_class %}main main-profile{% endblock %}
 
 {% macro show_provider_button(provider_id, display_name, conn) %}
-    <p>
+  <div class="span6">
     {% if conn %}
-      <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST">
-        <input name="message" type="text" value="Hello from Flask-Social-Example!"/>
-        <input type="submit" value="Post To {{ display_name }}" />
+      <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
+        <fieldset>
+          <legend>{{ display_name }}</legend>
+          <div class="control-group">
+            <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
+        </fieldset>
       </form>
-    </p>
-    <p>
-      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST">
-        <input type="submit" value="Remove {{ display_name }} Connection" />
+      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
+        <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
       </form>
-      {% else %}
-      <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST">
-        <input type="submit" value="Connect with {{ display_name }}" />
+    {% else %}
+      <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">
+        <fieldset>
+          <legend>{{ display_name }}</legend>
+          <div class="control-group">
+            <button type="submit" class="btn btn-success btn-large"><i class="icon-share icon-white"></i> Connect with {{ display_name }}</button>
+          </div>
+        </fieldset>
       </form>
     {% endif %}
-    </p>
+  </div>
 {% endmacro %}
 
 {% block layout %}
-<h2>Profile Page</h2>
+<div class="page-header">
+  <h1>Hello, {{ current_user.email }}!</h1>
+</div>
+<div class="row">
+  {{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
+  {{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
+</div>
 
-<h3>Hello, {{ current_user.email }}!</h3>
-
-{{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
-
-{{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
 {% endblock %}
