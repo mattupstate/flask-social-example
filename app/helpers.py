@@ -17,7 +17,7 @@ class Config(BaseConfig):
                 self['SQLALCHEMY_DATABASE_URI'] = os.environ[key]
                 break
 
-        for key in ['SECRET_KEY', 'GOOGLE_ANALYTICS_ID']:
+        for key in ['SECRET_KEY', 'GOOGLE_ANALYTICS_ID', 'ADMIN_CREDENTIALS']:
             if key in os.environ:
                 self[key] = os.environ[key]
 
