@@ -19,19 +19,24 @@ from flask.ext.social.datastore.sqlalchemy import SQLAlchemyConnectionDatastore
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
+from sqlalchemy.ext.declarative import declared_attr
+
 class SocialLoginError(Exception):
     def __init__(self, provider_id):
         self.provider_id = provider_id
 
+
 def check_auth(username, password):
     creds = current_app.config['ADMIN_CREDENTIALS'].split(',')
     return username == creds[0] and password == creds[1]
+
 
 def authenticate():
     return Response(
     'Could not verify your access level for that URL.\n'
     'You have to login with proper credentials', 401,
     {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
 
 def requires_auth(f):
     @wraps(f)
@@ -42,6 +47,7 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_yaml(app.root_path)
@@ -51,7 +57,13 @@ def create_app():
     init_assets(app)
     
     db = SQLAlchemy(app)
-    Security(app, SQLAlchemyUserDatastore(db))
+    
+    class UserModelMixin(object):
+        @declared_attr
+        def connections(cls):
+            return db.relationship('Connection', backref=db.backref('user', lazy='joined'), lazy='dynamic')
+
+    Security(app, SQLAlchemyUserDatastore(db, UserModelMixin))
     Social(app, SQLAlchemyConnectionDatastore(db))
     
     try:

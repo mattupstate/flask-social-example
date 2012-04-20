@@ -14,6 +14,7 @@
       <th>Username</th>
       <th>Email</th>
       <th>Joined On</th>
+      <th>Connections</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,11 @@
       <td>{{ u.username }}</td>
       <td>{{ u.email }}</td>
       <td>{{ u.created_at }}</td>
+      <td>
+      	{% for c in u.connections %}
+      	  {{ c.provider_id }}{% if not loop.last %}, {% endif %}
+      	{% endfor %}
+      </td>
     </tr>
   {% endfor %}
   </tbody>
