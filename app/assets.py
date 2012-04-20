@@ -24,7 +24,6 @@ def init_assets(app):
     assets = Environment(app)
     assets.manifest = 'cache' if not app.debug else False
     assets.cache = not app.debug
-    #assets.debug = app.config['ENVIRONMENT'] == 'development'
     assets.debug = app.debug
 
     assets.register('js_libs', js_libs)
