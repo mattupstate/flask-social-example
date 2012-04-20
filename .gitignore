@@ -2,7 +2,8 @@
 .settings
 .project
 .pydevproject
-.webaassets-cache
+app/static/.webaassets-cache/*
+!app/static/.webassets-cache/.gitignore
 *.pyc
 app/config/*.yml
 !app/config/app.yml

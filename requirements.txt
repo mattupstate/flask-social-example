@@ -8,4 +8,5 @@ psycopg2
 python-twitter
 py-bcrypt
 cssmin
+jsmin
 http://github.com/pythonforfacebook/facebook-sdk/tarball/master
