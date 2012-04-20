@@ -18,7 +18,7 @@ COMMON: &common
 
 DEVELOPMENT: &development
   <<: *common
-  DEBUG: True
+  DEBUG: False
 
 PRODUCTION: &production
   <<: *common

@@ -23,7 +23,8 @@ def init_assets(app):
 
     assets = Environment(app)
     assets.cache = False
-    assets.debug = app.config['ENVIRONMENT'] == 'development'
+    #assets.debug = app.config['ENVIRONMENT'] == 'development'
+    assets.debug = app.debug
 
     assets.register('js_libs', js_libs)
     assets.register('js_main', js_main)
