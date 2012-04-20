@@ -22,7 +22,7 @@ def init_assets(app):
                       output="css/main.css")
 
     assets = Environment(app)
-    assets.manifest = not app.debug
+    assets.manifest = 'cache' if not app.debug else False
     assets.cache = not app.debug
     #assets.debug = app.config['ENVIRONMENT'] == 'development'
     assets.debug = app.debug
