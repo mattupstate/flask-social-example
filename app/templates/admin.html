@@ -3,10 +3,20 @@
 {% block body_class %}admin admin-index{% endblock %}
 
 {% block layout %}
-<h2>Admin</h2>
+<div class="page-header">
+  <h1>Admin</h1>
+</div>
 
-<h3>Users</h3>
-<table>
+<h2>{{ user_count }} Users</h2>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Joined On</th>
+    </tr>
+  </thead>
+  <tbody>
   {% for u in users %}
     <tr>
       <td>{{ u.username }}</td>
@@ -14,5 +24,6 @@
       <td>{{ u.created_at }}</td>
     </tr>
   {% endfor %}
+  </tbody>
 </table>
 {% endblock %}
