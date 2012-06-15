@@ -26,3 +26,4 @@ python-twitter==0.8.2
 simplejson==2.4.0
 webassets==0.7
 wsgiref==0.1.2
+gunicorn==0.14.3
