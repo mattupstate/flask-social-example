@@ -29,6 +29,13 @@
   display: inline;
   overflow: auto;
 }
+.main-login ul.errors,
+.main-register ul.errors {
+  margin: 0;
+  padding: 0;
+  color: #FF0000;
+  list-style: none;
+}
 .main-login .content,
 .main-register .content {
   margin-top: 30px;
