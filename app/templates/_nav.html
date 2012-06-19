@@ -6,7 +6,7 @@
         <li><a href="{{ url_for('index') }}">Home</a></li>
         {%- if current_user.is_authenticated() -%}
         <li><a href="{{ url_for('profile') }}">Profile</a></li>
-        <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+        <li><a href="{{ url_for('flask_security.logout') }}">Log out</a></li>
         {%- else -%}
         <li><a href="{{ url_for('login') }}">Log in</a></li>
         <li><a href="{{ url_for('register') }}">Register</a></li>

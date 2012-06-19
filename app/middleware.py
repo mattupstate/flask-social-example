@@ -1,5 +1,6 @@
 from werkzeug import url_decode
 
+
 class MethodRewriteMiddleware(object):
 
     def __init__(self, app):

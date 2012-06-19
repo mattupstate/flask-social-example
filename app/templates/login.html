@@ -16,9 +16,9 @@
 </div>
 <div class="row content">
   <div class="span4 offset1">
-    <form class="well" action="{{ url_for('auth.authenticate') }}" method="POST">
+    <form class="well" action="{{ url_for('flask_security.authenticate') }}" method="POST">
       {{ form.hidden_tag() }}
-      {{ render_field(form.username) }}
+      {{ render_field(form.email) }}
       {{ render_field(form.password) }}
       <label class="checkbox">{{ form.remember()|safe }} Remember me</label>
       <button type="submit" class="btn btn-primary btn-large">Login</button>

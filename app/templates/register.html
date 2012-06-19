@@ -21,7 +21,6 @@
   <div class="span4 offset1">
     <form class="well" action="{{ url_for('register') }}" method="POST">
       {{ form.hidden_tag() }}
-      {{ render_field(form.username) }}
       {{ render_field(form.email) }}
       {{ render_field(form.password) }}
       {{ render_field(form.confirm) }}
