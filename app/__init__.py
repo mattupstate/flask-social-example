@@ -127,8 +127,8 @@ def create_app():
 
         return render_template('login.html', form=LoginForm())
 
-    #@app.route('/register/<provider_id>')
     @app.route('/register', methods=['GET', 'POST'])
+    @app.route('/register/<provider_id>')
     def register(provider_id=None):
         app.logger.debug("/register [%s]" % request.method)
 
