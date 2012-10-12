@@ -8,16 +8,14 @@ COMMON: &common
   SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
 
   SOCIAL_TWITTER:
-    oauth:
-      consumer_key: 'place holder'
-      consumer_secret: 'place holder'
+    consumer_key: 'place holder'
+    consumer_secret: 'place holder'
 
   SOCIAL_FACEBOOK:
-    oauth:
-      consumer_key: 'place holder'
-      consumer_secret: 'place holder'
-      request_token_params:
-        scope: 'email,publish_stream'
+    consumer_key: 'place holder'
+    consumer_secret: 'place holder'
+    request_token_params:
+      scope: 'email,publish_stream'
 
 DEVELOPMENT: &development
   <<: *common
