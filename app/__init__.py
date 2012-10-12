@@ -16,7 +16,11 @@ app.config.from_yaml(app.root_path)
 app.config.from_heroku()
 app.wsgi_app = MethodRewriteMiddleware(app.wsgi_app)
 
-app.logger.debug(app.config)
+app.logger.info('CHECKING CONFIG')
+
+for key, value in app.config.items():
+    if key.startswith('SOCIAL_'):
+        app.logger.info('%s=%s' % (key, value))
 
 db = SQLAlchemy(app)
 webassets = Environment(app)
