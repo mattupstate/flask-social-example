@@ -7,7 +7,7 @@ Flask-Principal==0.3.3
 Flask-SQLAlchemy==0.15
 Flask-Script==0.3.2
 Flask-Security==1.5.0
-https://github.com/mattupstate/flask-social/zipball/1.5.1
+Flask-Social==1.5.0
 Flask-WTF==0.8
 Jinja2==2.6
 PyYAML==3.10
