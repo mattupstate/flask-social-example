@@ -43,7 +43,6 @@ class SocialLoginError(Exception):
 @app.before_first_request
 def before_first_request():
     try:
-        models.db.drop_all()
         models.db.create_all()
     except Exception, e:
         app.logger.error(str(e))
