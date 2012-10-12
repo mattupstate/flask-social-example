@@ -10,12 +10,18 @@ roles_users = db.Table('roles_users',
 
 
 class Role(db.Model, RoleMixin):
+
+    __tablename__ = "roles"
+
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
 
 
 class User(db.Model, UserMixin):
+
+    __tablename__ = "users"
+
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(120))
@@ -32,6 +38,9 @@ class User(db.Model, UserMixin):
 
 
 class Connection(db.Model):
+
+    __tablename__ = "connections"
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     provider_id = db.Column(db.String(255))
