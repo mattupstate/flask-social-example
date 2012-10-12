@@ -3,7 +3,8 @@ from flask import render_template, redirect, request, current_app, session, \
      flash, url_for
 from flask.ext.security import LoginForm, current_user, login_required, \
      login_user
-from flask.ext.social.utils import get_display_name
+from flask.ext.social.utils import get_provider_or_404
+from flask.ext.social.views import connect_handler
 
 from . import app
 from .forms import RegisterForm
@@ -25,30 +26,33 @@ def login():
 
 
 @app.route('/register', methods=['GET', 'POST'])
-@app.route('/register/<provider_id>')
+@app.route('/register/<provider_id>', methods=['GET', 'POST'])
 def register(provider_id=None):
-    app.logger.debug("/register [%s]" % request.method)
-
     if current_user.is_authenticated():
         return redirect(request.referrer or '/')
 
     form = RegisterForm()
 
+    if provider_id:
+        provider = get_provider_or_404(provider_id)
+        connection_values = session.get('failed_login_connection', None)
+    else:
+        provider = None
+        connection_values = None
+
     if form.validate_on_submit():
-        user = current_app.security.datastore.create_user(
-                email=form.email.data,
-                password=form.password.data)
+        ds = current_app.security.datastore
+        ds.create_user(email=form.email.data, password=form.password.data)
+        ds.commit()
+        user = ds.find_user(email=form.email.data)
 
         # See if there was an attempted social login prior to registering
         # and if so use the provider connect_handler to save a connection
-        social_login_response = session.pop('last_oauth_response', None)
+        connection_values = session.pop('failed_login_connection', None)
+        connection_values['user_id'] = user.id
 
-        if social_login_response:
-            provider_id = social_login_response['provider_id']
-            oauth_response = social_login_response['oauth_response']
-
-            provider = getattr(app.social, provider_id)
-            provider.connect_handler(oauth_response, user_id=str(user.id))
+        if connection_values:
+            connect_handler(connection_values, provider)
 
         if login_user(user, remember=True):
             flash('Account created successfully', 'info')
@@ -56,15 +60,13 @@ def register(provider_id=None):
 
         return render_template('thanks.html', user=user)
 
-    social_login_failed = int(request.args.get('social_login_failed', 0))
-    provider_name = None
+    login_failed = int(request.args.get('login_failed', 0))
 
-    if social_login_failed and provider_id:
-        provider_name = get_display_name(provider_id)
-
-    return render_template('register.html', form=form,
-                           social_login_failed=social_login_failed,
-                           provider_name=provider_name)
+    return render_template('register.html',
+                           form=form,
+                           provider=provider,
+                           login_failed=login_failed,
+                           connection_values=connection_values)
 
 
 @app.route('/profile')

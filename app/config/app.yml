@@ -4,6 +4,9 @@ COMMON: &common
   SQLALCHEMY_DATABASE_URI: postgresql://postgres:password@127.0.0.1:5432/flask_social_example_development
   ADMIN_CREDENTIALS: 'admin,password'
 
+  SECURITY_TRACKABLE: True
+  SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
+
   SOCIAL_TWITTER:
     oauth:
       consumer_key: 'place holder'

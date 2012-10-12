@@ -14,11 +14,11 @@
           <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
         </fieldset>
       </form>
-      <form action="{{ url_for('flask_social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
+      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
         <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
       </form>
     {% else %}
-      <form action="{{ url_for('flask_social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">
+      <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">
         <fieldset>
           <legend>{{ display_name }}</legend>
           <div class="control-group">

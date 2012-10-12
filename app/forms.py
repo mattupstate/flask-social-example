@@ -1,9 +1,7 @@
 
 from flask import current_app
-from flask.ext.security.exceptions import UserNotFoundError
-from flask.ext.wtf import (Form, TextField, PasswordField, Required, Optional,
-                           Email, Length, Regexp, ValidationError, SubmitField,
-                           EqualTo)
+from flask.ext.wtf import (Form, TextField, PasswordField, Required, Email,
+                           Length, Regexp, ValidationError, EqualTo)
 
 
 class UniqueUser(object):
@@ -11,12 +9,9 @@ class UniqueUser(object):
         self.message = message
 
     def __call__(self, form, field):
-        current_app.logger.debug('wtf?????')
-        try:
-            current_app.security.datastore.find_user(email=field.data)
+        if current_app.security.datastore.find_user(email=field.data):
             raise ValidationError(self.message)
-        except UserNotFoundError, e:
-            current_app.logger.debug(str(e))
+
 
 validators = {
     'email': [

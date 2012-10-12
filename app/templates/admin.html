@@ -11,18 +11,20 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Username</th>
       <th>Email</th>
-      <th>Joined On</th>
+      <th>Last Login</th>
+      <th>Current Login</th>
+      <th>Login Count</th>
       <th>Connections</th>
     </tr>
   </thead>
   <tbody>
   {% for u in users %}
     <tr>
-      <td>{{ u.username }}</td>
       <td>{{ u.email }}</td>
-      <td>{{ u.created_at }}</td>
+      <td>{{ u.last_login_at }}</td>
+      <td>{{ u.current_login_at }}</td>
+      <td>{{ u.login_count }}</td>
       <td>
       	{% for c in u.connections %}
       	  {{ c.provider_id }}{% if not loop.last %}, {% endif %}
