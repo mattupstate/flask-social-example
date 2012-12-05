@@ -49,9 +49,9 @@ def register(provider_id=None):
         # See if there was an attempted social login prior to registering
         # and if so use the provider connect_handler to save a connection
         connection_values = session.pop('failed_login_connection', None)
-        connection_values['user_id'] = user.id
 
         if connection_values:
+            connection_values['user_id'] = user.id
             connect_handler(connection_values, provider)
 
         if login_user(user, remember=True):

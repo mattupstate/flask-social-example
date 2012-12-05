@@ -1,7 +1,7 @@
 COMMON: &common
   SECRET_KEY: insecure
   SECURITY_POST_LOGIN_VIEW: '/profile'
-  SQLALCHEMY_DATABASE_URI: postgresql://postgres:password@127.0.0.1:5432/flask_social_example_development
+  SQLALCHEMY_DATABASE_URI: postgresql://postgres:password@192.168.0.10:5432/flask_social_example_development
   ADMIN_CREDENTIALS: 'admin,password'
 
   SECURITY_TRACKABLE: True
