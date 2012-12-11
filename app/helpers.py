@@ -23,7 +23,6 @@ class Config(BaseConfig):
                 if ev in os.environ:
                     social_key = 'SOCIAL_' + key_prefix
                     oauth_key = 'consumer_' + key_suffix
-                    self.setdefault(social_key, {})
                     self[social_key][oauth_key] = os.environ[ev]
 
     def from_yaml(self, root_path):
