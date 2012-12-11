@@ -7,6 +7,23 @@ COMMON: &common
   SECURITY_TRACKABLE: True
   SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
 
+  SOCIAL_TWITTER:
+    consumer_key: 'key'
+    consumer_secret: 'secret'
+
+  SOCIAL_FACEBOOK:
+    consumer_key: 'key'
+    consumer_secret: 'secret'
+    request_token_params:
+      scope: 'email,publish_stream'
+
+  SOCIAL_GITHUB:
+    consumer_key: 'key'
+    consumer_secret: 'secret'
+    module: 'app.github'
+    request_token_params:
+      scope: 'user'
+
 DEVELOPMENT: &development
   <<: *common
   DEBUG: True
