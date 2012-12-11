@@ -7,16 +7,6 @@ COMMON: &common
   SECURITY_TRACKABLE: True
   SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
 
-  SOCIAL_TWITTER:
-    consumer_key: 'place holder'
-    consumer_secret: 'place holder'
-
-  SOCIAL_FACEBOOK:
-    consumer_key: 'place holder'
-    consumer_secret: 'place holder'
-    request_token_params:
-      scope: 'email,publish_stream'
-
 DEVELOPMENT: &development
   <<: *common
   DEBUG: True

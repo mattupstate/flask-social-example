@@ -28,6 +28,7 @@ social_ds = SQLAlchemyConnectionDatastore(db, models.Connection)
 app.security = Security(app, security_ds)
 app.social = Social(app, social_ds)
 
+print app.url_map
 
 class SocialLoginError(Exception):
     def __init__(self, provider):

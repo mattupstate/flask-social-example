@@ -74,7 +74,8 @@ def register(provider_id=None):
 def profile():
     return render_template('profile.html',
         twitter_conn=current_app.social.twitter.get_connection(),
-        facebook_conn=current_app.social.facebook.get_connection())
+        facebook_conn=current_app.social.facebook.get_connection(),
+        github_conn=current_app.social.github.get_connection())
 
 
 @app.route('/profile/<provider_id>/post', methods=['POST'])

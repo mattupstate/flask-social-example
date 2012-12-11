@@ -2,25 +2,27 @@
 
 {% block body_class %}main main-profile{% endblock %}
 
-{% macro show_provider_button(provider_id, display_name, conn) %}
+{% macro show_provider_button(provider_id, display_name, conn, show_update_form=True) %}
   <div class="span6">
+    <h2>{{ display_name }}</h2>
+    <hr />
     {% if conn %}
-      <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
-        <fieldset>
-          <legend>{{ display_name }}</legend>
-          <div class="control-group">
-            <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
-        </fieldset>
-      </form>
+      {% if show_update_form %}
+        <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
+          <fieldset>
+            <div class="control-group">
+              <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
+          </fieldset>
+        </form>
+      {% endif %}
       <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
         <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
       </form>
     {% else %}
       <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">
         <fieldset>
-          <legend>{{ display_name }}</legend>
           <div class="control-group">
             <button type="submit" class="btn btn-success btn-large"><i class="icon-share icon-white"></i> Connect with {{ display_name }}</button>
           </div>
@@ -38,5 +40,7 @@
   {{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
   {{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
 </div>
-
+<div class="row" style="margin-top:50px;">
+  {{ show_provider_button('github', 'GitHub', github_conn, False)}}
+</div>
 {% endblock %}
