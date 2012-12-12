@@ -21,8 +21,6 @@ COMMON: &common
     consumer_key: 'key'
     consumer_secret: 'secret'
     module: 'app.github'
-    request_token_params:
-      scope: 'user'
 
 DEVELOPMENT: &development
   <<: *common

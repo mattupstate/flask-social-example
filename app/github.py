@@ -10,7 +10,10 @@ config = {
     'base_url': 'https://api.github.com/',
     'request_token_url': None,
     'access_token_url': 'https://github.com/login/oauth/access_token',
-    'authorize_url': 'https://github.com/login/oauth/authorize'
+    'authorize_url': 'https://github.com/login/oauth/authorize',
+    'request_token_params': {
+        'scope': 'user'
+    }
 }
 
 
@@ -34,7 +37,7 @@ def get_connection_values(response, **kwargs):
     gh = github3.login(token=access_token)
     user = gh.user().to_json()
 
-    rv = dict(
+    return dict(
         provider_id=config['id'],
         provider_user_id=str(user['id']),
         access_token=access_token,
@@ -43,6 +46,3 @@ def get_connection_values(response, **kwargs):
         profile_url=user['html_url'],
         image_url=user['avatar_url']
     )
-
-    print rv
-    return rv
