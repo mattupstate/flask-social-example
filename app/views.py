@@ -8,7 +8,7 @@ from flask.ext.social.views import connect_handler
 
 from . import app, db
 from .forms import RegisterForm
-from .models import User, Connection
+from .models import User
 from .tools import requires_auth
 
 
