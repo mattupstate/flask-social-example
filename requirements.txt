@@ -6,7 +6,7 @@ Flask-OAuth==0.12
 Flask-Principal==0.3.3
 Flask-SQLAlchemy==0.15
 Flask-Script==0.3.2
-Flask-Security==1.5.0
+Flask-Security==1.5.2
 Flask-Social==1.5.3
 Flask-WTF==0.8
 Jinja2==2.6
