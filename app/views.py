@@ -6,9 +6,9 @@ from flask.ext.security import LoginForm, current_user, login_required, \
 from flask.ext.social.utils import get_provider_or_404
 from flask.ext.social.views import connect_handler
 
-from . import app
+from . import app, db
 from .forms import RegisterForm
-from .models import User
+from .models import User, Connection
 from .tools import requires_auth
 
 
@@ -103,7 +103,14 @@ def social_post(provider_id):
 @requires_auth
 def admin():
     users = User.query.all()
-    user_count = len(users)
-    return render_template('admin.html',
-                            users=users,
-                            user_count=user_count)
+    return render_template('admin.html', users=users)
+
+
+@app.route('/admin/users/<user_id>', methods=['DELETE'])
+@requires_auth
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    flash('User deleted successfully', 'info')
+    return redirect(url_for('admin'))

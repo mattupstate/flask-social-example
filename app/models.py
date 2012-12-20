@@ -32,9 +32,9 @@ class User(db.Model, UserMixin):
     current_login_ip = db.Column(db.String(100))
     login_count = db.Column(db.Integer)
     roles = db.relationship('Role', secondary=roles_users,
-                            backref=db.backref('users', lazy='dynamic'))
+            backref=db.backref('users', lazy='dynamic'))
     connections = db.relationship('Connection',
-                    backref=db.backref('user', lazy='joined'))
+            backref=db.backref('user', lazy='joined'), cascade="all")
 
 
 class Connection(db.Model):
