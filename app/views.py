@@ -42,9 +42,8 @@ def register(provider_id=None):
 
     if form.validate_on_submit():
         ds = current_app.security.datastore
-        ds.create_user(email=form.email.data, password=form.password.data)
+        user = ds.create_user(email=form.email.data, password=form.password.data)
         ds.commit()
-        user = ds.find_user(email=form.email.data)
 
         # See if there was an attempted social login prior to registering
         # and if so use the provider connect_handler to save a connection
@@ -54,7 +53,8 @@ def register(provider_id=None):
             connection_values['user_id'] = user.id
             connect_handler(connection_values, provider)
 
-        if login_user(user, remember=True):
+        if login_user(user):
+            ds.commit()
             flash('Account created successfully', 'info')
             return redirect(url_for('profile'))
 
