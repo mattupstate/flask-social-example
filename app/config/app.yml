@@ -8,19 +8,14 @@ COMMON: &common
   SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
 
   SOCIAL_TWITTER:
-    consumer_key: 'key'
-    consumer_secret: 'secret'
+    consumer_key: 'uDi3deDkmtAI8bEO1ZRVw'
+    consumer_secret: 'wSk3WmEPPCUW8oqxak8ljOKRVsHc4QQJwcjOLWbng'
 
   SOCIAL_FACEBOOK:
-    consumer_key: 'key'
-    consumer_secret: 'secret'
+    consumer_key: '151940354898522'
+    consumer_secret: 'ca9bfd56f7532132e98557cd4dbe7d02'
     request_token_params:
       scope: 'email,publish_stream'
-
-  SOCIAL_GITHUB:
-    consumer_key: 'key'
-    consumer_secret: 'secret'
-    module: 'app.github'
 
 DEVELOPMENT: &development
   <<: *common
@@ -30,4 +25,4 @@ PRODUCTION: &production
   <<: *common
   DEBUG: True
   SECURITY_PASSWORD_HASH: bcrypt
-  SOCIAL_APP_URL: http://flask-social-example.herokuapp.com/
+  SOCIAL_APP_URL: http://damp-falls-5846.herokuapp.com/
