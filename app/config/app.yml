@@ -16,6 +16,10 @@ COMMON: &common
     consumer_secret: 'ca9bfd56f7532132e98557cd4dbe7d02'
     request_token_params:
       scope: 'email,publish_stream'
+  
+  SOCIAL_FOURSQUARE:
+    consumer_key: 'ALTG0YPSIM50T2L0YHSRYXBOPT2W3XFNUPXGAOUTV24N1S1O'
+    consumer_secret: 'F4F0243OGH21VFLDG1NZQTQGSEFDBS5RB3YJ34L0DPNEY0HO'
 
 DEVELOPMENT: &development
   <<: *common
