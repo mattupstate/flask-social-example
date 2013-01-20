@@ -22,8 +22,8 @@ def get_provider_user_id(response, **kwargs):
     if response:
         t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                               app_secret = kwargs.get('consumer_secret'),
-                              oauth_token = response['access_token'],
-                              oauth_token_secret = response['secret']
+                              oauth_token = response['oauth_token'],
+                              oauth_token_secret = response['oauth_verifier']
                               )
         user = t.post('user/info')
         return user['user']['name']
@@ -35,8 +35,8 @@ def get_connection_values(response, **kwargs):
     
     t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                           app_secret = kwargs.get('consumer_secret'),
-                          oauth_token = response['access_token'],
-                          oauth_token_secret = response['secret']
+                          oauth_token = response['oauth_token'],
+                          oauth_token_secret = response['oauth_verifier']
                           )
     user = t.post('user/info')
     return dict(
