@@ -12,7 +12,7 @@ config = {
 }
 
 def get_api(connection, **kwargs):
-    return tumblpy.Tublpy(app_key = kwargs.get('consumer_key'),
+    return tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                           app_secret = kwargs.get('consumer_secret'),
                           oauth_token = connection.access_token,
                           oauth_token_secret = connection.secret
@@ -20,7 +20,7 @@ def get_api(connection, **kwargs):
 
 def get_provider_user_id(response, **kwargs):
     if response:
-        t = tumblpy.Tublpy(app_key = kwargs.get('consumer_key'),
+        t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                               app_secret = kwargs.get('consumer_secret'),
                               oauth_token = response['access_token'],
                               oauth_token_secret = response['secret']
@@ -33,7 +33,7 @@ def get_connection_values(response, **kwargs):
     if not response:
         return None
     
-    t = tumblpy.Tublpy(app_key = kwargs.get('consumer_key'),
+    t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                           app_secret = kwargs.get('consumer_secret'),
                           oauth_token = response['access_token'],
                           oauth_token_secret = response['secret']
