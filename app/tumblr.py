@@ -20,6 +20,7 @@ def get_api(connection, **kwargs):
 
 def get_provider_user_id(response, **kwargs):
     if response:
+        print response
         t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                               app_secret = kwargs.get('consumer_secret'),
                               oauth_token = response['oauth_token'],
