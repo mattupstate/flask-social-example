@@ -5,6 +5,7 @@ config = {
     'name': 'Tumblr',
     'install': 'pip install python-tumblpy',
     'module': 'app.tumblr',
+    'base_url': 'http://api.tumblr.com'
     'request_token_url': 'http://www.tumblr.com/oauth/request_token',
     'access_token_url': 'http://www.tumblr.com/oauth/access_token',
     'authorize_url': 'http://www.tumblr.com/oauth/authorize',
