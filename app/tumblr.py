@@ -38,7 +38,7 @@ def get_connection_values(response, **kwargs):
                           oauth_token_secret = response['secret']
                           )
     user = t.post('user/info')
-    return {
+    return dict(
         provider_id=config['id'],
         provider_user_id=str(user['user']['name']),
         access_token=response['access_token'],
@@ -46,4 +46,4 @@ def get_connection_values(response, **kwargs):
         display_name=user['user']['name'],
         profile_url=None,
         image_url=None,
-        }
+        )
