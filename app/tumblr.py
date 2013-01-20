@@ -42,8 +42,8 @@ def get_connection_values(response, **kwargs):
     return dict(
         provider_id=config['id'],
         provider_user_id=str(user['user']['name']),
-        access_token=response['access_token'],
-        secret=response['secret'],
+        access_token=response['oauth_token'],
+        secret=response['oauth_token_secret'],
         display_name=user['user']['name'],
         profile_url=None,
         image_url=None,
