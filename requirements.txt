@@ -20,7 +20,7 @@ chardet==1.0.1
 cssmin==0.1.4
 distribute==0.6.28
 facebook-sdk==0.3.1
-git+git://github.com/vvasabi/foursquare.git@fix-ssl-handshake
+foursquare==20120716
 github3.py==0.2
 gunicorn==0.14.6
 httplib2==0.7.7
@@ -34,6 +34,7 @@ passlib==1.6.1
 poster==0.8.1
 psycopg2==2.4.4
 python-daemon==1.6
+python-tumblpy==0.6.3
 python-twitter==0.8.2
 requests==0.14.1
 simplejson==2.4.0
