@@ -76,7 +76,7 @@ def profile():
         twitter_conn=current_app.social.twitter.get_connection(),
         facebook_conn=current_app.social.facebook.get_connection(),
         foursquare_conn=current_app.social.foursquare.get_connection(),
-        tumblr_conn=current_app.social.tumblr.get_connection())
+        github_conn=current_app.social.github.get_connection())
 
 
 @app.route('/profile/<provider_id>/post', methods=['POST'])

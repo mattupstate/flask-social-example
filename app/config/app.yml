@@ -21,9 +21,9 @@ COMMON: &common
     consumer_key: 'ALTG0YPSIM50T2L0YHSRYXBOPT2W3XFNUPXGAOUTV24N1S1O'
     consumer_secret: 'F4F0243OGH21VFLDG1NZQTQGSEFDBS5RB3YJ34L0DPNEY0HO'
   
-  SOCIAL_TUMBLR:
-    consumer_key: 'liPiwFKS2SQHZiDaSBl4cHukvqsAAAirKoDz78JyND5zOji0g3'
-    consumer_secret: 'Qi3WtXZicEk3QirGCLk5zWHbZQgUxwBdKrEKsZDjAdf8S2nnjW'
+  SOCIAL_GITHUB:
+    consumer_key: 'c35efe0e5c31d33fa9c3'
+    consumer_secret: '16d12a5f267d0818482d34a5ef6bf1e21a54e5ea'
 
 DEVELOPMENT: &development
   <<: *common
