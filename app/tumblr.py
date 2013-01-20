@@ -34,6 +34,7 @@ def get_connection_values(response, **kwargs):
     if not response:
         return None
     
+    print response
     t = tumblpy.Tumblpy(app_key = kwargs.get('consumer_key'),
                           app_secret = kwargs.get('consumer_secret'),
                           oauth_token = response['oauth_token'],
