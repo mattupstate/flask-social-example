@@ -24,6 +24,7 @@ COMMON: &common
   SOCIAL_GITHUB:
     consumer_key: 'c35efe0e5c31d33fa9c3'
     consumer_secret: '16d12a5f267d0818482d34a5ef6bf1e21a54e5ea'
+    module: 'app.github'
 
 DEVELOPMENT: &development
   <<: *common
