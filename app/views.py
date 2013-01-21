@@ -87,7 +87,7 @@ def social_post(provider_id):
 
     if message:
         conn = getattr(current_app.social, provider_id).get_connection()
-        api = conn['api']
+        api = conn.get_api()
 
         if provider_id == 'twitter':
             display_name = 'Twitter'
