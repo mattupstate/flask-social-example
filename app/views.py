@@ -1,4 +1,3 @@
-
 from flask import render_template, redirect, request, current_app, session, \
      flash, url_for
 from flask.ext.security import LoginForm, current_user, login_required, \
@@ -84,8 +83,8 @@ def social_post(provider_id):
     message = request.form.get('message', None)
 
     if message:
-        conn = getattr(current_app.social, provider_id).get_connection()
-        api = conn['api']
+        provider = get_provider_or_404(provider_id)
+        api = provider.get_api()
 
         if provider_id == 'twitter':
             display_name = 'Twitter'
