@@ -36,5 +36,5 @@ class RegisterForm(Form):
     confirm = PasswordField('Confirm Password')
     field_names = ['email','password','confirm']
 
-    def get_fields():
+    def get_fields(self):
         return [getattr(self,field_name) for field_name in self.field_names]
