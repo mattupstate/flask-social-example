@@ -20,7 +20,6 @@ def index():
 def login():
     if current_user.is_authenticated():
         return redirect(request.referrer or '/')
-
     return render_template('login.html', form=LoginForm())
 
 
@@ -72,14 +71,14 @@ def register(provider_id=None):
 @login_required
 def profile():
     return render_template('profile.html',
-        remote_apps=[current_app.social.twitter])
-
+                           remote_apps=[current_app.social.twitter])
 
 @app.route('/profile/<provider_id>/post', methods=['POST'])
 @login_required
 def social_post(provider_id):
     provider = get_provider_or_404(provider_id)
     form = request.form
+    form.usage_type = 'post'
     used_api = provider.use_api(form)
     flash(used_api)
     return redirect(url_for('profile'))
