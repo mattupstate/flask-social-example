@@ -1,18 +1,17 @@
 {% extends '/layouts/boilerplate.html' %}
 
+{% from '_macros.html' import render_fields %}
+
 {% block body_class %}main main-profile{% endblock %}
 
-{% macro show_provider_button(provider_id, display_name, conn, show_update_form=True) %}
+{% macro show_provider_button(provider_id, display_name, conn, post_form) %}
   <div class="span6">
     <h2>{{ display_name }}</h2>
     <hr />
     {% if conn %}
-      {% if show_update_form %}
+      {% if post_form %}
         <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
-          <fieldset>
-            <div class="control-group">
-              <textarea class="input-xlarge" name="message" rows="3">Hello from Flask-Social-Example!</textarea>
-            </div>
+          {{ render_fields(form) }}
             <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
           </fieldset>
         </form>
@@ -37,11 +36,9 @@
   <h1>Hello, {{ current_user.email }}!</h1>
 </div>
 <div class="row">
-  {{ show_provider_button('twitter', 'Twitter', twitter_conn) }}
-  {{ show_provider_button('facebook', 'Facebook', facebook_conn) }}
-  {{ show_provider_button('foursquare', 'Foursquare', foursquare_conn) }}
-  {{ show_provider_button('github', 'Github', github_conn) }}
-  {{ show_provider_button('tumblr', 'Tumblr', tumblr_conn) }}
+  {% for remote_app in remote_apps %}
+    {{ show_provider_button(remote_app.id, remote_app.name, remote_app.get_connection(), remote_app.get_form('post')) }}
+  {% endfor %}
 </div>
 <!--
 <div class="row" style="margin-top:50px;">
