@@ -1,15 +1,14 @@
 {% macro render_fields(form) %}
   {{ form.hidden_tag() }}
   {% for field_name in form.fields %}
-    {% field = getattr(form,field_name) %}
-    {{ field.label }}
-    {% if field.errors %}
+    {{ getattr(form,field_name).label }}
+    {% if getattr(form,field_name).errors %}
       <ul class="errors">
-      {% for error in field.errors %}
+      {% for error in getattr(form,field_name).errors %}
         <li>{{ error }}</li>
       {% endfor %}
       </ul>
     {% endif %}
-    {{ field(**kwargs)|safe }}
+    {{ getattr(form,field_name)(**kwargs)|safe }}
   {% endfor %}
 {% endmacro %}
