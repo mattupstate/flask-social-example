@@ -1,7 +1,7 @@
 {% macro render_fields(form) %}
   {{ form.hidden_tag() }}
   {% for field_name in form.fields %}
-    { field = getattr(form,field_name) }
+    {{ field = getattr(form,field_name) }}
     {{ field.label }}
     {% if field.errors %}
       <ul class="errors">
