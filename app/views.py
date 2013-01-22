@@ -71,7 +71,11 @@ def register(provider_id=None):
 @login_required
 def profile():
     return render_template('profile.html',
-                           remote_apps=[current_app.social.twitter])
+                           remote_apps=[current_app.social.twitter,
+                                        current_app.social.facebook,
+                                        current_app.social.foursquare,
+                                        current_app.social.tumblr,
+                                        current_app.social.github])
 
 
 @app.route('/profile/<provider_id>/<action>', methods=['POST'])
