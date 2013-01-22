@@ -33,7 +33,7 @@ def register(provider_id=None):
 
     form = RegisterForm()
     
-    print form.__dict__
+    print form.render_fields
 
     if provider_id:
         provider = get_provider_or_404(provider_id)
