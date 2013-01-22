@@ -78,7 +78,7 @@ def profile():
 @app.route('/profile/<provider_id>/post', methods=['POST'])
 @login_required
 def social_post(provider_id):
-
+    form = request.form
     if form.validate_on_submit():
         provider = get_provider_or_404(provider_id)
         used_api = provider.use_api(form)
