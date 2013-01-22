@@ -74,11 +74,11 @@ def profile():
                            remote_apps=[current_app.social.twitter])
 
 
-@app.route('/profile/<provider_id>/post', methods=['POST'])
+@app.route('/profile/<provider_id>/<action>', methods=['POST'])
 @login_required
-def social_post(provider_id):
+def social_api(provider_id,action):
     provider = get_provider_or_404(provider_id)
-    form = provider.get_form('post')()
+    form = provider.get_form(action)()
     if form.validate_on_submit():
         used_api = provider.use_api(form)
         flash(used_api)
