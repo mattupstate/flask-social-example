@@ -32,8 +32,6 @@ def register(provider_id=None):
         return redirect(request.referrer or '/')
 
     form = RegisterForm()
-    
-    print form.render_fields
 
     if provider_id:
         provider = get_provider_or_404(provider_id)

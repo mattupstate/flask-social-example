@@ -20,10 +20,7 @@
 <div class="row content">
   <div class="span4 offset1">
     <form class="well" action="{{ url_for('register', provider_id=provider.id if provider else None) }}" method="POST">
-      {{ form.hidden_tag() }}
-      {{ render_field(form.email) }}
-      {{ render_field(form.password) }}
-      {{ render_field(form.confirm) }}
+      {{ render_fields(form) }}
       <button type="submit" class="btn btn-primary btn-large">Register</button>
     </form>
   </div>
