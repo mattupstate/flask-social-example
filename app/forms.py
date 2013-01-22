@@ -34,4 +34,6 @@ class RegisterForm(Form):
     email = TextField('Email', validators['email'])
     password = PasswordField('Password', validators['password'], )
     confirm = PasswordField('Confirm Password')
-    fields = [email,password,confirm]
+    
+    def __init(self):
+        self.fields = [self.email,self.password,self.confirm]
