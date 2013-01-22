@@ -12,6 +12,7 @@
     {% if conn %}
       {% if post_form %}
         <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
+          {{ form.hidden_tag() }}
           {{ render_field(post_form.message) }}
             <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
         </form>
