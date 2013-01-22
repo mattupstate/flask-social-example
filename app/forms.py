@@ -34,4 +34,7 @@ class RegisterForm(Form):
     email = TextField('Email', validators['email'])
     password = PasswordField('Password', validators['password'], )
     confirm = PasswordField('Confirm Password')
-    fields = ['email','password','confirm']
+    field_names = ['email','password','confirm']
+
+    def get_fields():
+        return [getattr(self,field_name) for field_name in self.field_names]
