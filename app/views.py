@@ -78,20 +78,11 @@ def profile():
 @app.route('/profile/<provider_id>/post', methods=['POST'])
 @login_required
 def social_post(provider_id):
-    message = request.form.get('message', None)
 
-    if message:
+    if form.validate_on_submit():
         provider = get_provider_or_404(provider_id)
-        api = provider.get_api()
-
-        if provider_id == 'twitter':
-            display_name = 'Twitter'
-            api.PostUpdate(message)
-        if provider_id == 'facebook':
-            display_name = 'Facebook'
-            api.put_object("me", "feed", message=message)
-
-        flash('Message posted to %s: %s' % (display_name, message), 'info')
+        used_api = provider.use_api(form)
+        flash(used_api)
 
     return redirect(url_for('profile'))
 
