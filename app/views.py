@@ -78,8 +78,9 @@ def profile():
 def social_post(provider_id):
     provider = get_provider_or_404(provider_id)
     form = provider.get_form('post')()
-    print request.method
-    print form.message.data
+    flash('hello')
+    flash(request.method)
+    flash(form.message.data)
     if form.validate_on_submit():
         used_api = provider.use_api(form)
         flash(used_api)
