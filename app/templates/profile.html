@@ -1,0 +1,47 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% from '_macros.html' import render_field %}
+
+{% block body_class %}main main-profile{% endblock %}
+
+{% macro show_provider_button(provider_id, display_name, conn, post_form) %}
+  <div class="span6">
+    <h2>{{ display_name }}</h2>
+    <hr />
+    {% if conn %}
+      {% if post_form %}
+        <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
+          {{ render_field(post_form.message) }}
+            <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
+        </form>
+      {% endif %}
+      <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
+        <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> Remove {{ display_name }} Connection</button>
+      </form>
+    {% else %}
+      <form action="{{ url_for('social.connect', provider_id=provider_id) }}" method="POST" class="create-connection">
+        <fieldset>
+          <div class="control-group">
+            <button type="submit" class="btn btn-success btn-large"><i class="icon-share icon-white"></i> Connect with {{ display_name }}</button>
+          </div>
+        </fieldset>
+      </form>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% block layout %}
+<div class="page-header">
+  <h1>Hello, {{ current_user.email }}!</h1>
+</div>
+<div class="row">
+  {% for remote_app in remote_apps %}
+    {{ show_provider_button(remote_app.id, remote_app.name, remote_app.get_connection(), remote_app.get_form('post')()) }}
+  {% endfor %}
+</div>
+<!--
+<div class="row" style="margin-top:50px;">
+  {{ show_provider_button('github', 'GitHub', github_conn, False)}}
+</div>
+-->
+{% endblock %}

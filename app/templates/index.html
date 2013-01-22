@@ -1,0 +1,71 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}main main-index{% endblock %}
+
+{% block layout %}
+  <div class="hero-unit">
+    <h1>Welcome</h1>
+    <p>
+      This site illustrates the functionality provided by the <strong>Flask-Social</strong>
+      extension for <strong>Flask</strong>.
+    </p>
+    <p>
+      <a class="btn btn-primary btn-large" href="http://packages.python.org/Flask-Social"><i class="icon-list-alt icon-white"></i> Flask-Social Documentation</a>
+      <a class="btn btn-primary btn-large" href="http://packages.python.org/Flask-Security"><i class="icon-list-alt icon-white"></i> Flask-Security Documentation</a>
+      <a class="btn btn-primary btn-large" href="http://flask.pocoo.org"><i class="icon-info-sign icon-white"></i> Lean more about Flask</a>
+    </p>
+  </div>
+  <div class="row">
+    <div class="span4">
+      <div class="well repo-info">
+        <h2>Flask-Security</h2>
+        <ul class="repo-actions">
+          <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-security&type=watch&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+          </li>
+          <!-- <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-security&type=fork&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="120px" height="30px"></iframe></p>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well repo-info">
+        <h2>Flask-Social</h2>
+        <ul class="repo-actions">
+          <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-social&type=watch&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+          </li>
+          <!-- <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-social&type=fork&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="120px" height="30px"></iframe></p>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="span4">
+      <div class="well repo-info">
+        <h2>This Website</h2>
+        <ul class="repo-actions">
+          <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-social-example&type=watch&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+          </li>
+          <!-- <li>
+            <iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&repo=flask-social-example&type=fork&count=true&size=large"
+                    allowtransparency="true" frameborder="0" scrolling="0" width="120px" height="30px"></iframe></p>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span10 offset1">
+      <p>Flask-Social is an extension for the wonderful Python web framework, <a href="http://flask.pocoo.org">Flask</a>. It aims to add simple OAuth provider integration to your application. It is dependent on the <a href="http://packages.python.org/Flask-Security">Flask-Security</a> extension which provides simple user management. This website serves as an example of how to use both extensions effectively.</p>
+      <p>Essentially, Flask-Social sets up endpoints for your app to make it easy for you to let your users connect and/or login using Facebook and Twitter. Flask-Social persists the connection information and allows you to get a configured instance of an API object with your user’s token so you can make API calls on behalf of them. Currently Facebook and Twitter are supported out of the box as long as you install the appropriate API library.</p>
+    </div>
+  </div>
+{% endblock %}

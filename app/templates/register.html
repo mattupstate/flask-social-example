@@ -1,0 +1,41 @@
+{% from '_macros.html' import render_field %}
+
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}main main-register{% endblock %}
+
+{% macro social_register(provider_id, display_name) %}
+  <form action="{{ url_for('social.login', provider_id=provider_id) }}" method="POST">
+    <button type="submit" class="btn btn-primary btn-large">Register with {{ display_name }}</button>
+  </form>
+{% endmacro %}
+
+{% block layout %}
+<div class="page-header">
+  <h1>Register</h1>
+</div>
+{% if login_failed %}
+<h3>Register with your {{ provider.name }} account: {{ connection_values['display_name'] }}</h3>
+{% endif %}
+<div class="row content">
+  <div class="span4 offset1">
+    <form class="well" action="{{ url_for('register', provider_id=provider.id if provider else None) }}" method="POST">
+      {{ form.hidden_tag() }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.confirm) }}
+      <button type="submit" class="btn btn-primary btn-large">Register</button>
+    </form>
+  </div>
+  {% if not login_failed %}
+  <div class="span2 col2">
+    <h3>OR</h3>
+  </div>
+  <div class="span4 col3">
+    {{ social_register('twitter', 'Twitter' )}}
+    {{ social_register('facebook', 'Facebook' )}}
+    <!-- {{ social_register('github', 'GitHub' )}} -->
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+.DS_Store
+.vagrant
+.settings
+.project
+.pydevproject
+app/static/.webaassets-cache/*
+!app/static/.webassets-cache/.gitignore
+*.pyc
+app/config/*.yml
+!app/config/app.yml
+venv/

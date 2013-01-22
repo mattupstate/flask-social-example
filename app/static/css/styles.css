@@ -1,0 +1,54 @@
+.tidy {
+  margin: 0;
+  padding: 0;
+}
+.navbar .github li {
+  margin: 10px 0 0 10px;
+}
+.footer {
+  margin: 50px 0;
+  padding: 10px;
+  border-top: 1px solid #EEE;
+  text-align: center;
+  color: #888;
+}
+.main-index div.repo-info {
+  text-align: center;
+}
+.main-index div.repo-info h2 {
+  margin-bottom: 15px;
+}
+.main-index ul.repo-actions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-index ul.repo-actions li {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  overflow: auto;
+}
+.main-login ul.errors,
+.main-register ul.errors {
+  margin: 0;
+  padding: 0;
+  color: #FF0000;
+  list-style: none;
+}
+.main-login .content,
+.main-register .content {
+  margin-top: 30px;
+}
+.main-login .content .col2,
+.main-register .content .col2 {
+  text-align: center;
+  padding-top: 80px;
+}
+.main-login .content .col3,
+.main-register .content .col3 {
+  padding-top: 50px;
+}
+.main-profile textarea {
+  display: block;
+}

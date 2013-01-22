@@ -1,0 +1,43 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}admin admin-index{% endblock %}
+
+{% block layout %}
+<div class="page-header">
+  <h1>Admin</h1>
+</div>
+
+<h2>{{ users|length }} Users</h2>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Last Login</th>
+      <th>Current Login</th>
+      <th>Login Count</th>
+      <th>Connections</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for u in users %}
+    <tr>
+      <td>{{ u.email }}</td>
+      <td>{{ u.last_login_at }}</td>
+      <td>{{ u.current_login_at }}</td>
+      <td>{{ u.login_count }}</td>
+      <td>
+      	{% for c in u.connections %}
+      	  {{ c.provider_id }}{% if not loop.last %}, {% endif %}
+      	{% endfor %}
+      </td>
+      <td>
+        <form action="{{ url_for('delete_user', user_id=u.id) }}?__METHOD_OVERRIDE__=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

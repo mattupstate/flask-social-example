@@ -1,0 +1,9 @@
+{% extends '/layouts/boilerplate.html' %}
+
+{% block body_class %}main main-thanks{% endblock %}
+
+{% block layout %}
+<h2>Thank You!</h2>
+
+<p>Thanks for registering <strong>{{ user.email }}</strong>! You can now view your <a href="{{ url_for('profile') }}">profile page</a></p>
+{% endblock %}

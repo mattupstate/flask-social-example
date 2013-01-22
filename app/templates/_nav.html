@@ -1,0 +1,21 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Flask-Social Example</a>
+      <ul class="nav">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        {%- if current_user.is_authenticated() -%}
+        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+        <li><a href="{{ url_for('security.logout') }}">Log out</a></li>
+        {%- else -%}
+        <li><a href="{{ url_for('security.login') }}">Log in</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+        {%- endif -%}
+      </ul>
+      <ul class="nav pull-right github">
+        <li><iframe src="http://ghbtns.com/github-btn.html?user=mattupstate&type=follow"
+  allowtransparency="true" frameborder="0" scrolling="0" width="143px" height="20px"></iframe></li>
+      </ul>
+    </div>
+  </div>
+</div>
