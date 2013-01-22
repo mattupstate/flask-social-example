@@ -1,6 +1,6 @@
 {% extends '/layouts/boilerplate.html' %}
 
-{% from '_macros.html' import render_fields %}
+{% from '_macros.html' import render_field %}
 
 {% block body_class %}main main-profile{% endblock %}
 
@@ -11,7 +11,7 @@
     {% if conn %}
       {% if post_form %}
         <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
-          {{ render_fields(post_form) }}
+          {{ render_field(post_form.message(class='input_xlarge')) }}
             <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
         </form>
       {% endif %}
