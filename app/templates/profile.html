@@ -13,7 +13,6 @@
         <form action="{{ url_for('social_post', provider_id=provider_id) }}" method="POST" class="post-update">
           {{ render_fields(post_form) }}
             <button type="submit" class="btn btn-primary btn-large"><i class="icon-share icon-white"></i> Post Update</button>
-          </fieldset>
         </form>
       {% endif %}
       <form action="{{ url_for('social.remove_connection', provider_id=conn.provider_id, provider_user_id=conn.provider_user_id) }}?__METHOD_OVERRIDE__=DELETE" method="POST" class="remove-connection">
