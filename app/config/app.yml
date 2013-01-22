@@ -8,27 +8,27 @@ COMMON: &common
   SOCIAL_CONNECT_ALLOW_VIEW: '/profile'
 
   SOCIAL_TWITTER:
-    consumer_key: 'uDi3deDkmtAI8bEO1ZRVw'
-    consumer_secret: 'wSk3WmEPPCUW8oqxak8ljOKRVsHc4QQJwcjOLWbng'
+    consumer_key: 'key'
+    consumer_secret: 'secret'
 
   SOCIAL_FACEBOOK:
-    consumer_key: '151940354898522'
-    consumer_secret: 'ca9bfd56f7532132e98557cd4dbe7d02'
+    consumer_key: 'key'
+    consumer_secret: 'secret'
     request_token_params:
       scope: 'email,publish_stream'
   
   SOCIAL_FOURSQUARE:
-    consumer_key: 'ALTG0YPSIM50T2L0YHSRYXBOPT2W3XFNUPXGAOUTV24N1S1O'
-    consumer_secret: 'F4F0243OGH21VFLDG1NZQTQGSEFDBS5RB3YJ34L0DPNEY0HO'
+    consumer_key: 'key'
+    consumer_secret: 'secret'
   
   SOCIAL_GITHUB:
-    consumer_key: 'c35efe0e5c31d33fa9c3'
-    consumer_secret: '16d12a5f267d0818482d34a5ef6bf1e21a54e5ea'
+    consumer_key: 'key'
+    consumer_secret: 'secret'
     module: 'app.github'
   
   SOCIAL_TUMBLR:
-    consumer_key: 'liPiwFKS2SQHZiDaSBl4cHukvqsAAAirKoDz78JyND5zOji0g3'
-    consumer_secret: 'Qi3WtXZicEk3QirGCLk5zWHbZQgUxwBdKrEKsZDjAdf8S2nnjW'
+    consumer_key: 'key'
+    consumer_secret: 'secret'
     module: 'app.tumblr'
 
 DEVELOPMENT: &development
