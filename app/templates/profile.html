@@ -37,7 +37,7 @@
 </div>
 <div class="row">
   {% for remote_app in remote_apps %}
-    {{ show_provider_button(remote_app.id, remote_app.name, remote_app.get_connection(), remote_app.get_form('post')) }}
+    {{ show_provider_button(remote_app.id, remote_app.name, remote_app.get_connection(), remote_app.get_form('post')()) }}
   {% endfor %}
 </div>
 <!--
