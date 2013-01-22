@@ -1,3 +1,4 @@
+
 git+git://github.com/eriktaubeneck/flask-social.git@develop
 Flask==0.9
 Flask-Assets==0.7
