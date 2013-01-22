@@ -1,18 +1,3 @@
-{% macro render_fields(form) %}
-  {{ form.hidden_tag() }}
-  {% for field in form.get_fields() %}
-    {{ field.label }}
-    {% if field.errors %}
-      <ul class="errors">
-      {% for error in field.errors %}
-        <li>{{ error }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-    {{ field(**kwargs)|safe }}
-  {% endfor %}
-{% endmacro %}
-
 {% macro render_field(field) %}
   {{ field.label }}
   {% if field.errors %}

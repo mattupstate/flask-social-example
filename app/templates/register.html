@@ -1,4 +1,4 @@
-{% from '_macros.html' import render_fields %}
+{% from '_macros.html' import render_field %}
 
 {% extends '/layouts/boilerplate.html' %}
 
@@ -20,7 +20,10 @@
 <div class="row content">
   <div class="span4 offset1">
     <form class="well" action="{{ url_for('register', provider_id=provider.id if provider else None) }}" method="POST">
-      {{ render_fields(form) }}
+      {{ form.hidden_tag() }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.confirm) }}
       <button type="submit" class="btn btn-primary btn-large">Register</button>
     </form>
   </div>
