@@ -75,6 +75,7 @@ def profile():
         remote_apps=[current_app.social.twitter])
 
 
+
 @app.route('/profile/<provider_id>/post', methods=['POST'])
 @login_required
 def social_post(provider_id):

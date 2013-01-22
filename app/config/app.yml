@@ -20,7 +20,7 @@ COMMON: &common
   SOCIAL_FOURSQUARE:
     consumer_key: 'key'
     consumer_secret: 'secret'
-  
+
   SOCIAL_GITHUB:
     consumer_key: 'key'
     consumer_secret: 'secret'
@@ -39,4 +39,5 @@ PRODUCTION: &production
   <<: *common
   DEBUG: True
   SECURITY_PASSWORD_HASH: bcrypt
-  SOCIAL_APP_URL: http://damp-falls-5846.herokuapp.com/
+  SOCIAL_APP_URL: http://flask-social-example.herokuapp.com/
+

@@ -9,3 +9,4 @@ app/static/.webaassets-cache/*
 app/config/*.yml
 !app/config/app.yml
 venv/
+

@@ -1,0 +1,15 @@
+[submodule "cookbooks/postgresql"]
+	path = cookbooks/postgresql
+	url = https://github.com/opscode-cookbooks/postgresql.git
+[submodule "cookbooks/openssl"]
+	path = cookbooks/openssl
+	url = https://github.com/opscode-cookbooks/openssl.git
+[submodule "cookbooks/database"]
+	path = cookbooks/database
+	url = https://github.com/opscode-cookbooks/database.git
+[submodule "cookbooks/xfs"]
+	path = cookbooks/xfs
+	url = https://github.com/opscode-cookbooks/xfs.git
+[submodule "cookbooks/build-essential"]
+	path = cookbooks/build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
