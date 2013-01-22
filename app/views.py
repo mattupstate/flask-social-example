@@ -81,6 +81,7 @@ def social_post(provider_id):
     flash('hello')
     flash(request.method)
     flash(form.message.data)
+    flash(form.validate_on_submit())
     if form.validate_on_submit():
         used_api = provider.use_api(form)
         flash(used_api)
