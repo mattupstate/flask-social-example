@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, current_app, session, \
-     flash, url_for
+    flash, url_for
 from flask.ext.security import LoginForm, current_user, login_required, \
-     login_user
+    login_user
 from flask.ext.social.utils import get_provider_or_404
 from flask.ext.social.views import connect_handler
 
@@ -13,7 +13,7 @@ from .tools import requires_auth
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', total_users=User.query.count())
 
 
 @app.route('/login')
