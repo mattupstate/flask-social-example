@@ -20,7 +20,6 @@ def index():
 def login():
     if current_user.is_authenticated():
         return redirect(request.referrer or '/')
-
     return render_template('login.html', form=LoginForm())
 
 
@@ -72,29 +71,21 @@ def register(provider_id=None):
 @login_required
 def profile():
     return render_template('profile.html',
-        twitter_conn=current_app.social.twitter.get_connection(),
-        facebook_conn=current_app.social.facebook.get_connection(),
-        github_conn=current_app.social.github.get_connection())
+                           remote_apps=[current_app.social.twitter,
+                                        current_app.social.facebook,
+                                        current_app.social.foursquare,
+                                        current_app.social.tumblr,
+                                        current_app.social.github])
 
 
-@app.route('/profile/<provider_id>/post', methods=['POST'])
+@app.route('/profile/<provider_id>/<action>', methods=['POST'])
 @login_required
-def social_post(provider_id):
-    message = request.form.get('message', None)
-
-    if message:
-        provider = get_provider_or_404(provider_id)
-        api = provider.get_api()
-
-        if provider_id == 'twitter':
-            display_name = 'Twitter'
-            api.PostUpdate(message)
-        if provider_id == 'facebook':
-            display_name = 'Facebook'
-            api.put_object("me", "feed", message=message)
-
-        flash('Message posted to %s: %s' % (display_name, message), 'info')
-
+def social_api(provider_id,action):
+    provider = get_provider_or_404(provider_id)
+    form = provider.get_form(action)()
+    if form.validate_on_submit():
+        used_api = provider.use_api(form)
+        flash(used_api)
     return redirect(url_for('profile'))
 
 

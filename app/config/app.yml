@@ -16,7 +16,7 @@ COMMON: &common
     consumer_secret: 'secret'
     request_token_params:
       scope: 'email,publish_stream'
-
+  
   SOCIAL_GITHUB:
     consumer_key: 'key'
     consumer_secret: 'secret'
