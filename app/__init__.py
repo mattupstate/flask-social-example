@@ -56,7 +56,7 @@ def on_login_failed(sender, provider, oauth_response):
     # Save the oauth response in the session so we can make the connection
     # later after the user possibly registers
     session['failed_login_connection'] = \
-        get_conection_values_from_oauth_response(provider, oauth_response)
+        get_connection_values_from_oauth_response(provider, oauth_response)
 
     raise SocialLoginError(provider)
 
