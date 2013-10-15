@@ -7,7 +7,7 @@ Flask-Principal==0.4.0
 Flask-SQLAlchemy==0.15
 Flask-Script==0.3.2
 Flask-Security==1.6.9
-Flask-Social==1.6.1
+Flask-Social==1.6.2
 Flask-WTF==0.9.3
 Jinja2==2.7.1
 MarkupSafe==0.18
