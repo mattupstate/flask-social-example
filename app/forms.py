@@ -1,8 +1,8 @@
 
 from flask import current_app
-from flask.ext.wtf import (Form, TextField, PasswordField, Required, Email,
-                           Length, Regexp, ValidationError, EqualTo)
-
+from flask.ext.wtf import Form
+from wtforms import TextField, PasswordField, ValidationError
+from wtforms.validators import Required, Email, Length, Regexp, EqualTo
 
 class UniqueUser(object):
     def __init__(self, message="User exists"):
