@@ -1,4 +1,3 @@
-
 from flask import redirect, url_for, session
 from flask.ext.assets import Environment
 from flask.ext.security import Security, SQLAlchemyUserDatastore
