@@ -1,0 +1,7 @@
+{
+  "name": "flask-social-example",
+  "description": "An application that serves as a working example for Flask-Social.",
+  "repository": "https://github.com/mattupstate/flask-social-example",
+  "website": "https://github.com/mattupstate/flask-social-example",
+  "keywords": ["python", "flask", "social"]
+}
