@@ -14,7 +14,7 @@ MarkupSafe==0.18
 PyYAML==3.10
 SQLAlchemy==0.7.6
 WTForms==1.0.5
-Werkzeug==0.9.4
+Werkzeug==0.15.3
 apiclient==1.0.2
 argparse==1.2.1
 blinker==1.3
