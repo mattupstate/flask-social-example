@@ -24,7 +24,7 @@ facebook-sdk==0.3.1
 github3.py==0.7.1
 google-api-python-client==1.1
 gunicorn==0.14.6
-httplib2==0.8
+httplib2==0.18.0
 itsdangerous==0.23
 jsmin==2.0.2
 lockfile==0.9.1
