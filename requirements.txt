@@ -11,7 +11,7 @@ Flask-Social==1.6.2
 Flask-WTF==0.9.3
 Jinja2==2.7.1
 MarkupSafe==0.18
-PyYAML==3.10
+PyYAML==5.4
 SQLAlchemy==0.7.6
 WTForms==1.0.5
 Werkzeug==0.9.4
